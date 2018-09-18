@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:property-placeholder location="classpath:db.properties" />
+
+
+
+
+    <bean id="dataSource" class = "org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name = "driverClassName" value = "${dbDriver}"/>
+        <property name = "url" value = "${dbUrl}"/>
+        <property name = "username" value = "${dbUser}"/>
+        <property name = "password" value = "${dbPassword}"/>
+    </bean>
+
+    <bean id = "itemDaoImpl" class = "by.anjei.shop.db.daoimplementation.ItemDaoImpl">
+        <property name = "dataSource" ref = "dataSource" />
+    </bean>
+
+    <bean id = "orderDaoImpl" class = "by.anjei.shop.db.daoimplementation.OrderDaoImpl">
+        <property name = "dataSource" ref = "dataSource" />
+    </bean>
+
+    <bean id = "orderedItemDaoImpl" class = "by.anjei.shop.db.daoimplementation.OrderedItemDaoImpl">
+        <property name = "dataSource" ref = "dataSource" />
+    </bean>
+
+    <bean id = "userDaoImpl" class = "by.anjei.shop.db.daoimplementation.UserDaoImpl">
+        <property name = "dataSource" ref = "dataSource" />
+    </bean>
+
+    <bean id = "tablesSetupDaoImpl" class = "by.anjei.shop.db.util.TablesSetupDaoImpl">
+        <property name = "dataSource" ref = "dataSource" />
+    </bean>
+
+</beans>
